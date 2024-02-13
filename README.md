@@ -10,6 +10,7 @@ Run using:
 
 config-name options are:
 - CMS_mtt_ALPS: reproduce fig. 8 of https://arxiv.org/abs/2303.17634
+- ATLAS_pt_ALPS: reproduce fig. 9 of https://arxiv.org/abs/2303.17634
 
 Requirements:
 - hydra
