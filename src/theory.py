@@ -2,20 +2,39 @@ import numpy as np
 
 
 def signal(exp):
+    """
+    Signal model: assigns the function relevant to
+    the model analysis of interest, and returns the signal components.
+
+    Returns
+    -------
+    float
+        Components of the signal model in an EFT approximation: e.g. SM, linear, quadratic
+
+    Raises
+    ------
+    ValueError
+        If the input modelname is unknown
+
+    """
     if exp.modelname == "CMS_mtt_1D_RunII_ALPS":
         signal = signal_CMS_mtt_1D_RunII_ALPS(exp)
         return signal
     else:
-        print("raise error here")
+        print("raise error here")  # to do
 
 
 def signal_CMS_mtt_1D_RunII_ALPS(exp):
     """
-    Construct model signal as a function of the model parameter of interest.
-    Branch this out into a choice of models:
-    if model-name = ..., call funcA() etc
-    Calculate SM + C^2*sigma + C^4*sigma
-    and uncertainties
+    Signal model for the analysis of top ALPS using CMS ttbar data.
+
+    Returns
+    -------
+    numpy.ndarray
+        2D array, specifying the SM, quadratic ALP and quartic ALP contributions to
+        the total theory predictions to this dataset, assuming the Wilson coefficient
+        ct=1.
+
     """
 
     kfac = kfactor(exp)
@@ -55,6 +74,17 @@ def signal_CMS_mtt_1D_RunII_ALPS(exp):
 
 
 def kfactor(exp):
+    """
+    QCD kfactor
+    If specified in the config file, load a QCD kfactor to multiply by theory predictions.
+
+    Returns
+    -------
+    numpy.ndarray
+        1D array, of length equal to the number of bins, specifying the ratio of the SM predictions at NNLO in QCD
+        to the predictions at NLO in QCD
+
+    """
     if exp.cfg.model.kfactor == None:
         kfac = np.ones(len(exp.proc_data))
     else:
