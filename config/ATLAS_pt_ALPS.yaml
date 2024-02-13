@@ -1,0 +1,29 @@
+data:
+  data_path: /Users/maevemadigan/Documents/*Work/Misc/model-analysis/src/data-files/ATLAS_pt_1D_RunII/ATLAS_data_proc.txt
+  covmat_path: /Users/maevemadigan/Documents/*Work/Misc/model-analysis/src/data-files/ATLAS_pt_1D_RunII/ATLAS_data_covmat.txt
+  data_label: ATLAS_pt_1D_RunII
+
+
+model:
+  model_path: /Users/maevemadigan/Documents/*Work/Misc/model-analysis/src/model-files/ATLAS_pt_1D_RunII_ALPS
+  SM_file: pth_nnpdf4p0_alphaS_SM.txt
+  model_file_lin: pth_nnpdf4p0_alphaS_quad.txt
+  model_file_quad: pth_nnpdf4p0_alphaS_quart.txt
+  model_format: null
+  model_label: ALPS #will feature in the model_constructor choice
+  kfactor: kfac_nnlo_ATLAS.txt
+  BR: 0.2877 
+
+plotting:
+  params_to_plot: [0.0, 4.0, 12.0, 15.0]  
+
+defaults: 
+  - default
+  - _self_
+
+
+#Plot settings
+plottitle:  "ATLAS data compared to SM+ALP signal"
+plotxlabel: "$p_{T}(t_{h})$ [GeV]"
+plotylabel: "$\\frac{d \\sigma}{d p_{T}(t_{h})}$ [pb/GeV]"
+plotfilename: "ATLAS_pth_ALP.pdf"

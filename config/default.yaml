@@ -1,17 +1,17 @@
 data:
-  data_path: /Users/maevemadigan/Documents/*Work/Misc/model-analysis/src/data-files/CMS_mtt_1D_2018/HEPData-ins1901295-v1-parton_abs_ttm.csv
-  covmat_path: /Users/maevemadigan/Documents/*Work/Misc/model-analysis/src/data-files/CMS_mtt_1D_2018/HEPData-ins1901295-v1-parton_abs_ttm_covariance.csv
+  data_path: /Users/maevemadigan/Documents/*Work/Misc/model-analysis/src/data-files/CMS_mtt_1D_RunII/HEPData-ins1901295-v1-parton_abs_ttm.csv
+  covmat_path: /Users/maevemadigan/Documents/*Work/Misc/model-analysis/src/data-files/CMS_mtt_1D_RunII/HEPData-ins1901295-v1-parton_abs_ttm_covariance.csv
   data_label: CMS_mtt_1D_RunII
 
 
 model:
-  model_path: /Users/maevemadigan/Documents/*Work/Misc/model-analysis/src/model-files/CMS_mtt_1D_2018_ALPS
+  model_path: /Users/maevemadigan/Documents/*Work/Misc/model-analysis/src/model-files/CMS_mtt_1D_RunII_ALPS
   SM_file: mtt_nnpdf4p0_alphaS_SM.txt
   model_file_lin: mtt_nnpdf4p0_alphaS_lin.txt
   model_file_quad: mtt_nnpdf4p0_alphaS_quad.txt
-  model_format: None
+  model_format: null
   model_label: ALPS #will feature in the model_constructor choice
-  kfactor: None
+  kfactor: null
 
 
 run_name: null
