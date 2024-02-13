@@ -4,9 +4,6 @@ from scipy.optimize import minimize, brentq
 
 
 def chi2(ct, signal, exp):
-    """
-    construct chi-squared test-statistic as a function of the model parameter of interest
-    """
     sm = signal[:, 0]
     quad = signal[:, 1]
     quart = signal[:, 2]
@@ -14,10 +11,6 @@ def chi2(ct, signal, exp):
     diff = theory - exp.proc_data
     Vinv = np.linalg.inv(exp.proc_covmat)
     return ((diff).dot(Vinv)).dot(diff)
-
-
-def poisson():
-    return 0
 
 
 def limits(exp):
