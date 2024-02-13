@@ -13,6 +13,7 @@ model:
   model_label: ALPS #will feature in the model_constructor choice
     #kfactor: kfac_nnlo_lo.txt
   kfactor: kfac_nnlo_lo_highstats.txt
+  BR: 0.2877
 
 
 defaults: 

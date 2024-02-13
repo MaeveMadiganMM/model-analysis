@@ -1,19 +1,16 @@
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 from src.theory import signal as model
 
-font = {"size": 13}
-matplotlib.rc("font", **font)
+import seaborn as sns
 colors = sns.color_palette("colorblind", 8)
 
 
 def plotter(exp):
     # config things
     ctvals = [0.0, 4.0, 12.0, 20.0]
-    BR = 0.2877
 
     len_data = len(exp.bins) - 1
 
@@ -29,6 +26,7 @@ def plotter(exp):
     data_unc_plot = np.concatenate([data_unc, [data_unc[-1]]])
 
     fig = plt.figure(figsize=(7, 7))
+    matplotlib.rc("font", **exp.cfg.font)
     gs = fig.add_gridspec(
         2,
         1,
@@ -72,7 +70,7 @@ def plotter(exp):
 
     for ind in range(len(ctvals)):
         # Get model predictions
-        signalComp = model(exp, BR)
+        signalComp = model(exp)
 
         signal = (
             signalComp[:, 0]

@@ -26,8 +26,7 @@ def limits(exp):
     chivals = []
 
     # Get model predictions
-    BR = 0.2877  # make config
-    signal = model(exp, BR)
+    signal = model(exp)
 
     # minimise the chi2
     min1, min2 = (

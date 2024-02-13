@@ -1,15 +1,15 @@
 import numpy as np
 
 
-def signal(exp, BR):
+def signal(exp):
     if exp.modelname == "CMS_mtt_1D_RunII_ALPS":
-        signal = signal_CMS_mtt_1D_RunII_ALPS(exp, BR)
+        signal = signal_CMS_mtt_1D_RunII_ALPS(exp)
         return signal
     else:
         print("raise error here")
 
 
-def signal_CMS_mtt_1D_RunII_ALPS(exp, BR):
+def signal_CMS_mtt_1D_RunII_ALPS(exp):
     """
     Construct model signal as a function of the model parameter of interest.
     Branch this out into a choice of models:
@@ -23,7 +23,7 @@ def signal_CMS_mtt_1D_RunII_ALPS(exp, BR):
     bins_width = exp.bins[1:] - exp.bins[:-1]
 
     sm = np.divide(
-        BR
+        float(exp.cfg.model.BR)
         * np.loadtxt(
             exp.cfg.model.model_path + "/" + exp.cfg.model.SM_file,
             dtype=float,
@@ -32,7 +32,7 @@ def signal_CMS_mtt_1D_RunII_ALPS(exp, BR):
         bins_width,
     )
     axion_lin = np.divide(
-        BR
+        float(exp.cfg.model.BR)
         * np.loadtxt(
             exp.cfg.model.model_path + "/" + exp.cfg.model.model_file_lin,
             usecols=(2,),
@@ -41,7 +41,7 @@ def signal_CMS_mtt_1D_RunII_ALPS(exp, BR):
         bins_width,
     )
     axion_quad = np.divide(
-        BR
+        float(exp.cfg.model.BR)
         * np.loadtxt(
             exp.cfg.model.model_path + "/" + exp.cfg.model.model_file_quad,
             usecols=(2,),
