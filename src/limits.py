@@ -4,6 +4,16 @@ from scipy.optimize import minimize, brentq
 
 
 def chi2(ct, signal, exp):
+    """
+    Chi2 test-statistic as a function of the parameter of interest.
+    Built from the signal predictions and data inputs.
+
+    Returns
+    -------
+    float
+        Value of the chi2 at the given value of ct
+
+    """
     sm = signal[:, 0]
     quad = signal[:, 1]
     quart = signal[:, 2]
@@ -14,6 +24,16 @@ def chi2(ct, signal, exp):
 
 
 def limits(exp):
+    """
+    Limit-setting routine.
+    Solves for the minimum chi2, and obtains the values of ct at which delta chi2 = 0.99, 3.84
+
+    Returns
+    -------
+    List
+        List of floats, giving the upper and lower constraints at 68 and 95% CL
+
+    """
     cvals = np.arange(-30, 30, 1)
     exp.proc_covmat = exp.proc_covmat
     chivals = []

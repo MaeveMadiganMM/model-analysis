@@ -1,15 +1,20 @@
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
-
 from src.theory import signal as model
-
 import seaborn as sns
 
 colors = sns.color_palette("colorblind", 8)
 
 
 def plotter(exp):
+    """
+    Histogram plotter:
+    Creates a comparison of the specified data and model predictions.
+
+    Upper plot: standard data-theory comparison
+    Lower plot: ratio to data
+    """
     ctvals = exp.cfg.plotting.params_to_plot
     len_data = len(exp.bins) - 1
     bins_centre = 0.5 * (exp.bins[:-1] + exp.bins[1:])
