@@ -1,0 +1,6 @@
+hydra
+numpy
+seaborn
+matplotlib
+black
+scipy
