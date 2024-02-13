@@ -66,10 +66,18 @@ def read_ATLAS_pt_1D_RunII(exp):
     """
     Read and parse the datasets .... ref
     """
-    atlas_hepdata = np.genfromtxt(exp.cfg.data.data_path, dtype=float,usecols=(0,1,2,))
-    atlas_bins = atlas_hepdata[:,0]
-    atlas_bins = np.append(atlas_bins,atlas_hepdata[-1,1])
-    atlas_data = atlas_hepdata[:,2]
+    atlas_hepdata = np.genfromtxt(
+        exp.cfg.data.data_path,
+        dtype=float,
+        usecols=(
+            0,
+            1,
+            2,
+        ),
+    )
+    atlas_bins = atlas_hepdata[:, 0]
+    atlas_bins = np.append(atlas_bins, atlas_hepdata[-1, 1])
+    atlas_data = atlas_hepdata[:, 2]
 
     atlas_covmat = np.genfromtxt(exp.cfg.data.covmat_path, dtype=float)
 

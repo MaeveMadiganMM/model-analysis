@@ -124,6 +124,7 @@ def signal_ATLAS_pt_1D_RunII_ALPS(exp):
     axion_signal = np.c_[kfac * sm, kfac * axion_lin, kfac * axion_quad]
     return axion_signal
 
+
 def kfactor(exp):
     """
     QCD kfactor
