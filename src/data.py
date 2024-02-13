@@ -3,17 +3,18 @@ import numpy as np
 
 
 def preprocess(exp):
-    ''' 
+    """
     header function, calls the functions below depending on tag
-    '''
+    """
 
-    if exp.cfg.data.data_label == 'CMS_mtt_1D_RunII':
+    if exp.cfg.data.data_label == "CMS_mtt_1D_RunII":
         bins, data, covmat = read_CMS_mtt_1D_RunII(exp)
     else:
-        print('data label not recognised')
-        print('data_label',exp.cfg.data.data_label)
+        print("data label not recognised")
+        print("data_label", exp.cfg.data.data_label)
 
     return bins, data, covmat
+
 
 def csv_reader(filename):
     """Generic CSV reader"""
@@ -27,9 +28,9 @@ def csv_reader(filename):
 
 
 def read_CMS_mtt_1D_RunII(exp):
-    '''
+    """
     Read and parse the datasets .... ref
-    '''
+    """
     builtdata = csv_reader(exp.cfg.data.data_path)
     cms_data = []
     bins = []
@@ -44,7 +45,7 @@ def read_CMS_mtt_1D_RunII(exp):
 
     covmatlist = []
     count = 0
-    for item in builtcovdata[9:int(9+ndat*ndat)]:
+    for item in builtcovdata[9 : int(9 + ndat * ndat)]:
         covmatlist.append(float(item[6]))
 
     for i in range(ndat):
@@ -52,6 +53,8 @@ def read_CMS_mtt_1D_RunII(exp):
             cms_covmat[i, j] = covmatlist[count]
             count += 1
 
-    return np.array(bins,dtype=float), np.array(cms_data,dtype=float), np.array(cms_covmat,dtype=float)
-
-
+    return (
+        np.array(bins, dtype=float),
+        np.array(cms_data, dtype=float),
+        np.array(cms_covmat, dtype=float),
+    )
