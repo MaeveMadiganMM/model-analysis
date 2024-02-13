@@ -5,16 +5,13 @@ import matplotlib.pyplot as plt
 from src.theory import signal as model
 
 import seaborn as sns
+
 colors = sns.color_palette("colorblind", 8)
 
 
 def plotter(exp):
-    # config things
-    ctvals = [0.0, 4.0, 12.0, 20.0]
-
+    ctvals = exp.cfg.plotting.params_to_plot
     len_data = len(exp.bins) - 1
-
-    # organise bins
     bins_centre = 0.5 * (exp.bins[:-1] + exp.bins[1:])
     bins_width = exp.bins[1:] - exp.bins[:-1]
 
@@ -57,21 +54,18 @@ def plotter(exp):
     )
     ax.set_title(exp.cfg.plottitle)
     ax.set_yscale("log")
-    ax.set_xlim([355, 3500])  # change to bins min and max
+    ax.set_xlim([exp.bins[0], exp.bins[-1]])
     ax.set_xlabel(exp.cfg.plotxlabel)
     ax.set_ylabel(exp.cfg.plotylabel)
 
     # Lower plot | ax_ratio
     ax_ratio.set_xlabel(exp.cfg.plotxlabel)
     ax_ratio.set_ylabel("Ratio to data")
-    ax_ratio.hlines(
-        xmin=355, xmax=3500, y=1.0, color=colors[0]
-    )  # change to bins min and max
+    ax_ratio.hlines(xmin=exp.bins[0], xmax=exp.bins[-1], y=1.0, color=colors[0])
 
+    # Get model predictions
+    signalComp = model(exp)
     for ind in range(len(ctvals)):
-        # Get model predictions
-        signalComp = model(exp)
-
         signal = (
             signalComp[:, 0]
             + ctvals[ind] ** 2 * signalComp[:, 1]
@@ -80,22 +74,18 @@ def plotter(exp):
 
         # Main plot | ax
         signal_plot = np.concatenate([signal, [signal[-1]]])
-        # signal_unc_plot = np.concatenate([signal_unc, [signal_unc[-1]]])
 
         ax.step(
             exp.bins,
             signal_plot,
             where="post",
-            label=r"SM + ALP, $c_{t}/f_a = $" + str(int(ctvals[ind])) + r" TeV$^{-1}$",
+            label=r"SM + ALP, $c_{t}/f_a = $" + f"{ctvals[ind]}" + r"TeV$^{-1}$",
             color=colors[ind + 1],
         )
 
         # Lower plot | ax_ratio
         signal_ratio = np.divide(signal_plot, exp.proc_data_plot)
         data_ratio_unc = np.divide(data_unc_plot, exp.proc_data_plot)
-        # signal_ratio_unc = signal_ratio * np.sqrt(
-        #    data_ratio_unc**2 + np.divide(signal_unc_plot, signal_plot) ** 2
-        # )
 
         ax_ratio.step(exp.bins, signal_ratio, where="post", color=colors[ind + 1])
     ax_ratio.fill_between(
@@ -108,5 +98,4 @@ def plotter(exp):
     )
 
     ax.legend()
-    # plt.tight_layout()
     plt.savefig("outputs/" + exp.cfg.plotfilename)
