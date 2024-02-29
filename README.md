@@ -1,5 +1,5 @@
 Connects a measurement from HEPdata to a theory provided by LHE events, for the purpose of statistical inference.
-Used in a number of pheno studies.
+Used in pheno studies (e.g. ALPs, see below)
 
 Options are:
 - plotting
